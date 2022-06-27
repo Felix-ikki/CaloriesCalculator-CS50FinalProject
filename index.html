@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<HTML lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Calories calculator</title>
+<style>
+a {
+  background-color: #82bcff;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+a:hover {
+  background-color: #2088ff;
+}
+
+a:active {
+    background-color: #2e77ca;
+}
+</style>
+</head>
+<body>
+    
+    <section id='hero'>
+        <div>
+            <h1>Calories calculator</h1>
+        </div>
+
+        <div id='buttonUnitsContainer'>
+            <a class='btn' id='USunits'>US units</a>
+            <a class='btn' id='METRICunits'>metric units</a>
+        </div>
+
+        <div id='infoContainer'>
+            <div>
+                <h2>Whats your sex?</h2>
+                    <input type='radio' name='sex' id='male'>Male</input>
+                    <input type='radio' name='sex' id='female'>Female</input>
+            </div>
+            <div>
+                <h2>Whats your age</h2>
+                    <input type='number' id='age' min='15' max='80'></input>
+                    <p>Ages 15-80</p>
+            </div>
+            <div>
+                <h2>Whats your weight</h2>
+                    <input type='number' id='weight'></input>
+            </div>
+            <div>
+                <h2>Whats your height?</h2>
+                    <input type='number' id='height'></input>
+            </div>
+            <div>
+                <h2>How many times per week do you work out?</h2>
+                    <select name='activity' id='activity'>
+                        <option value='1.2'>Little or no activity</option>
+                        <option value='1.375'><b>Light:</b> 1-3 times a week</option>
+                        <option value='1.55'><b>Moderate:</b> 3-5 times a week</option>
+                        <option value='1.725'><b>Very Active:</b> intense training 6-7 times a week</option>
+                        <option value='1.9'><b>Super active:</b> very intense training daily plus physical job everyday or training twice a day</option>
+                    </select>
+            </div>
+            <div>
+                <h2>You plan to</h2>
+                    <input type='radio' name='plan' id='cut'>Cut</input>
+                    <input type='radio' name='plan' id='maintain'>Maintain</input>
+                    <input type='radio' name='plan' id='bulk'>Bulk</input>
+            </div>
+            <div> 
+                <button type='button' id='calculate'>Calculate</button>
+            </div>
+            <div id='finalDiv'><p>hola</p></div>
+        </section>
+
+    <script>
+        const male = document.querySelector('#male');
+        const female = document.querySelector('#female');
+        const age = document.querySelector('#age');
+        const weight = document.querySelector('#weight');
+        const height = document.querySelector('#height');
+        const activity = document.querySelector('#activity');
+        const calculate = document.querySelector('#calculate');
+        const USunits = document.querySelector('#USunits');
+        const METRICunits = document.querySelector('#METRICunits');
+
+//creo una variable que sea true si usunits es clicked y si clikeo la otra sea false
+//hago cada formula en un array de 2 formulas segun sea pounds o kgs
+
+        let USunitsClicked = false;
+        let METRICunitsClicked = false;
+
+        USunits.addEventListener('click', setClickedUS());
+        METRICunits.addEventListener('click', setClickedMETRIC());
+
+        function setClickedUS() {
+            USunitsClicked = true;
+            METRICunitsClicked = false;
+            console.log('cut')
+        }
+
+        function setClickedMETRIC() {
+            METRICunitsClicked = true;
+            USunitsClicked = false;
+            console.log('cut')
+        }
+
+        //POUNDS
+        const BMRmalePOUNDS = (4.536 * weight) + (15.88 * height) - (5 * age) + 5;
+        const BMRfemalePOUNDS = (4.536 * weight) + (15.88 * height) - (5 * age) - 161;
+
+        //KGS
+        const BMRmaleKG = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+        const BMRfemaleKG = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+
+
+
+        calculate.addEventListener('click', calculateCalories());
+
+    
+        function calculateCalories() {
+            if (USunitsClicked) {
+                if (male.Checked) {
+                    let p1 = document.createElement('p');
+                    let BMR = BMRmalePOUNDS;
+                    const activity = activity.value;
+                    p1.innerHTML = 'Your BMR is: ' + BMR * activity;
+                    const finalDiv = querySelector('#finalDiv');
+                    finalDiv.insertAdjacentHTML('afterbegin', p1);
+                    let p2 = document.createElement('p');
+
+                    if (cut.checked) {
+                        p2.innerHTML = 'For cutting you have to eat ' + BMR * activity - 500 
+                        + 'calories';
+                        finalDiv.insertAdjacentHTML('afterbegin', p2);
+                        console.log('cut');
+                    }
+                    else if (maintain.checked) {
+                        p2.innerHTML = 'For mainting you have to eat ' + BMR * activity;
+                        finalDiv.insertAdjacentHTML('afterbegin', p2);
+                        console.log('cut');
+                    }
+                     else if (bulk.checked) {
+                        p2.innerHTML = 'For bulking you have to eat ' + BMR * activity + 500
+                         + 'calories';
+                        finalDiv.insertAdjacentHTML('afterbegin', p2);
+                        console.log('cut');
+                   }
+                }
+                else if (female.checked) {
+                    let p1 = document.createElement('p');
+                    let BMR = BMRfemalePOUNDS;
+                    const activity = activity.value;
+                    p1.innerHTML = 'Your BMR is: ' + BMR * activity;
+                    const finalDiv = querySelector('#finalDiv');
+                    finalDiv.insertAdjacentHTML('afterbegin', p1);
+                    let p2 = document.createElement('p');
+
+                    if (cut.checked) {
+                        p2.innerHTML = 'For cutting you have to eat ' + BMR * activity - 500 
+                        + 'calories';
+                        finalDiv.insertAdjacentHTML('afterbegin', p2);
+                    }
+                    else if (maintain.checked) {
+                        p2.innerHTML = 'For mainting you have to eat ' + BMR * activity;
+                        finalDiv.insertAdjacentHTML('afterbegin', p2);
+                    }
+                    else if (bulk.checked) {
+                        p2.innerHTML = 'For bulking you have to eat ' + BMR * activity + 500
+                        + 'calories';
+                        finalDiv.insertAdjacentHTML('afterbegin', p2);
+                        }
+                    }
+                }
+
+            else if (METRICunitsClicked) {
+                if (male.Checked) { 
+                    let p1 = document.createElement('p');
+                    let BMR = BMRmaleKG;
+                    const activity = activity.value; 
+                    p1.innerHTML = 'Your BMR is: ' + BMR * activity;
+                    const finalDiv = querySelector('#finalDiv');
+                    finalDiv.insertAdjacentHTML('afterbegin', p1);
+                    let p2 = document.createElement('p');
+
+                    if (cut.checked) {
+                        p2.innerHTML = 'For cutting you have to eat ' + BMR * activity - 500 
+                        + 'calories';
+                        finalDiv.insertAdjacentHTML('afterbegin', p2);
+                    }
+                    else if (maintain.checked) {
+                        p2.innerHTML = 'For mainting you have to eat ' + BMR * activity;
+                        finalDiv.insertAdjacentHTML('afterbegin', p2);
+                    }
+                    else if (bulk.checked) {
+                        p2.innerHTML = 'For bulking you have to eat ' + BMR * activity + 500
+                         + 'calories';
+                         finalDiv.insertAdjacentHTML('afterbegin', p2);
+                    }
+                }
+
+                if (female.checked) {
+                    let p1 = document.createElement('p');
+                    let BMR = BMRfemaleKG;
+                    const activity = activity.value; 
+                    p1.innerHTML = 'Your BMR is: ' + BMR * activity;
+                    const finalDiv = querySelector('#finalDiv');
+                    finalDiv.insertAdjacentHTML('afterbegin', p1);
+                    let p2 = document.createElement('p');
+
+                    if (cut.checked) {
+                        p2.innerHTML = 'For cuttin you have to eat ' + BMR * activity - 500 + 'calories';
+                        finalDiv.insertAdjacentHTML('afterbegin', p2);
+                    }
+                    else if (maintain.checked) {
+                        p2.innerHTML = 'For maintaining you have to eat ' + BMR * activity + 'calories';
+                        finalDiv.insertAdjacentHTML('afterbegin', p2);
+                    }
+                    else if (bulk.checked) {
+                        p2.innerHTML = 'For bulking you have to eat ' + BMR * activity + 500 + 'calories';
+                        finalDiv.insertAdjacentHTML('afterbegin', p2);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</HTML>
