@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Felix-ikki/PROJECT.git"
+    "url": "git+https://github.com/Felix-ikki/CaloriesCalculator-CS50FinalProject.git"
   },
   "author": "Felix Di Luciano <centenofelix98@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Felix-ikki/PROJECT/issues"
+    "url": "https://github.com/Felix-ikki/CaloriesCalculator-CS50FinalProject/issues"
   },
-  "homepage": "https://github.com/Felix-ikki/PROJECT"
+  "homepage": "https://github.com/Felix-ikki/CaloriesCalculator-CS50FinalProject"
 }
