@@ -1,0 +1,21 @@
+{
+  "name": "cs50-final-project",
+  "version": "1.0.0",
+  "description": "Gym Routine Creator",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Felix-ikki/PROJECT.git"
+  },
+  "author": "Felix Di Luciano <centenofelix98@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Felix-ikki/PROJECT/issues"
+  },
+  "homepage": "https://github.com/Felix-ikki/PROJECT"
+}
